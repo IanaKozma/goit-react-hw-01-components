@@ -1,42 +1,51 @@
-import user from '../../user.json';
 import PropTypes from 'prop-types';
-import { Profile, Description, Name, Tag, Location, Stats, Label, Quantity } from './Profile.styled';
+import { ProfileCard, Description, Avatar, Name, Tag, Location, Stats, StatsItem, Label, Quantity } from './Profile.styled';
 
-export const ProfileCard = ({ user }) => {
+export const Profile = ({
+    username,
+    tag,
+    location,
+    avatar,
+    stats: {followers, likes, views},
+}) => {
     return (
-        <Profile>
+        <ProfileCard>
             <Description>
-                <Avatar>
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png"
-                    alt="User avatar"
+                <Avatar
+                    src={avatar}
+                    alt="User avatar">
                 </Avatar>
-                <Name>{user.username}</Name>
-                <Tag>{user.tag}</Tag>
-                <Location>{user.location}</Location>
+                <Name>{username}</Name>
+                <Tag>{tag}</Tag>
+                <Location>{location}</Location>
             </Description>
 
             <Stats>
-                <li>
+                <StatsItem>
                     <Label>Followers</Label>
-                    <Quantity>{user.stats.followers}</Quantity>
-                </li>
-                <li>
+                    <Quantity>{followers}</Quantity>
+                </StatsItem>
+                <StatsItem>
                     <Label>Views</Label>
-                    <Quantity>{user.stats.views}</Quantity>
-                </li>
-                <li>
+                    <Quantity>{views}</Quantity>
+                </StatsItem>
+                <StatsItem>
                     <Label>Likes</Label>
-                    <Quantity>{user.stats.likes}</Quantity>
-                </li>
+                    <Quantity>{likes}</Quantity>
+                </StatsItem>
             </Stats>
-        </Profile>
+        </ProfileCard>
     );
-};
+}
 
 Profile.propTypes = {
     username: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     tag: PropTypes.string.isRequired,
-    avatar: PropTypes.any,
-    stats: PropTypes.number.isRequired,
+    avatar: PropTypes.string.isRequired,
+    stats: PropTypes.shape({
+        followers: PropTypes.number,
+        views: PropTypes.number,
+        likes: PropTypes.number,
+    }),
 };
