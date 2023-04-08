@@ -22,10 +22,10 @@ export const FriendList = ({ friends }) => {
 FriendList.propTypes = {
     friends: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.number,
-            isOnline: PropTypes.bool,
+            id: PropTypes.number.isRequired,
+            isOnline: PropTypes.bool.isRequired,
             avatar: PropTypes.string,
-            name: PropTypes.string,
+            name: PropTypes.string.isRequired,
         })
     ).isRequired,
 };
